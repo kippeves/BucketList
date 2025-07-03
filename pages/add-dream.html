@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/add-dream.css">
+    <title>BUCKETLIST - Nytt mål</title>
+</head>
+
+<body>
+    <header>
+        <section class="header-top">
+            <h1>Nytt mål</h1>
+            <a href="dashboard.html">
+                <img src="../assets/images/cross_close.png" width="15" height="15" alt="Gå tillbaka till översikten">
+            </a>
+        </section>
+        <figure>
+            <img src="https://picsum.photos/id/823/175/175" alt="Användarens profilbild">
+        </figure>
+        <h3>Fortsätt drömma, <span id="user-name">NAMN</span>!</h3>
+    </header>
+    <main>
+        <form>
+            <label for="dream">Dröm:</label>
+            <input type="text" id="dream" required />
+            <label for="dream-select">Tema:</label>
+            <select id="dream-select" name="dream" required>
+                <option value="">-- Välj ett tema --</option>
+                <option value="teknik">Teknikdrömmar</option>
+                <option value="vardag">Vardagsdrömmar</option>
+                <option value="hus">Husdrömmar</option>
+                <option value="sport">Sportdrömmar</option>
+            </select>
+            <button>Lägg till</button>
+        </form>
+    </main>
+</body>
+
+</html>

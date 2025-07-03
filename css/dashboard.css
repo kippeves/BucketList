@@ -1,0 +1,48 @@
+ @import './global.css';
+ @import './page-header.css';
+
+ h2 {
+     text-align: center;
+     font-weight: 400;
+     margin: var(--spacing-medium);
+ }
+
+ .list-heading {
+     padding: var(--spacing-small) 0;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .list-heading h4 {
+     margin: unset;
+ }
+
+ .list-heading img {
+     height: 20px;
+ }
+
+ .dream-list {
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+ }
+
+ .dream-list_item {
+     font-weight: bold;
+     display: grid;
+     grid-template-columns: 40px auto;
+ }
+
+ .dream-list_item>* {
+     align-self: start;
+ }
+
+ .dream-check {
+     width: min-content;
+ }
+
+ .dream-theme {
+     font-weight: 400;
+     font-style: italic;
+ }
