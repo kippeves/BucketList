@@ -12,3 +12,7 @@ Kort och gott: tanken är att studenterna ska
 * I settings kunna ändra namnet man satt från login
 * I settings kunna lägga till nya teman på drömmar
 * I settings kunna ta bort teman och även rensa det teman på de drömmar som hade den
+
+
+## TODO:
+* Kunna ta bort en dröm helt
