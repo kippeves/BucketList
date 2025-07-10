@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/add-dream.css">
     <title>BUCKETLIST - Nytt mål</title>
-    <script src="../dist/AddDream.js" defer></script>
+    <script src="../dist/pages/AddDream.js" defer></script>
 </head>
 
 <body>
@@ -20,9 +20,10 @@
         <figure>
             <img src="https://picsum.photos/id/823/175/175" alt="Användarens profilbild">
         </figure>
-        <h3>Fortsätt drömma, <span id="user-name">NAMN</span>!</h3>
+        <p>Fortsätt drömma, <span id="user-name">NAMN</span>!</p>
     </header>
     <main>
+        <h2>Lägg till en ny dröm</h2>
         <form>
             <label for="dream">Dröm:</label>
             <input type="text" id="dream" placeholder="Ex. Besök Machu Picchu" aria-describedby="dream-error-message" required />
@@ -36,7 +37,7 @@
                 <option value="sport">Sportdrömmar</option>
             </select> 
             <p id="theme-error-message" class="error-message" role="alert" style="display: none;">Vänligen välj ett tema för din dröm.</p>
-            <button>Lägg till</button>
+            <button type="submit">Lägg till</button>
         </form>
     </main>
 </body>

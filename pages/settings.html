@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/settings.css">
     <title>BUCKETLIST - Inställningar</title>
-    <script type="module" src="../dist/Settings.js" defer></script>
+    <script type="module" src="../dist/pages/Settings.js" defer></script>
 </head>
 
 <body>
@@ -21,14 +21,14 @@
         <figure>
             <img src="https://picsum.photos/id/823/175/175" alt="Användarens profilbild">
         </figure>
-        <h3>Här kan du ändra inställningar</h3>
+        <p>Här kan du ändra inställningar</p>
     </header>
     <main>
         <h4>Användarinfo</h4>
         <div class="change-name">
             <label for="name-input" class="visually-hidden">Ändra användarnamn:</label>
             <input id="name-input" type="text" placeholder="Ditt användarnamn" />
-            <button aria-label="Spara nytt användarnamn" class="confirm-input">Spara</button>
+            <button type="button" aria-label="Spara nytt användarnamn" class="confirm-input">Spara</button>
         </div>
         <h4>Drömteman</h4>
         <ul id="theme-list"></ul>
@@ -36,9 +36,9 @@
         <div class="add-theme">
             <label for="theme-input" class="visually-hidden">Nytt tema:</label>
             <input id="theme-input" type="text" />
-            <button class="confirm-input" aria-label="Lägg till nytt tema">Lägg till</button>
+            <button type="button" class="confirm-input" aria-label="Lägg till nytt tema">Lägg till</button>
         </div>
-        <button class="logout">Logga ut</button>
+        <button type="button" class="logout">Logga ut</button>
     </main>
 </body>
 

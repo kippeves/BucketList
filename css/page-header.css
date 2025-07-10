@@ -21,7 +21,7 @@
      border-radius: 100%;
  }
 
- h1, h3 {
+ h1, p {
      color: white;
      font-weight: 400;
  }
@@ -33,7 +33,7 @@
      justify-self: center;
  }
 
- h3 {
+ p {
      margin-bottom: unset;
  }
 
