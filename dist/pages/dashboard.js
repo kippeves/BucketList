@@ -1,2 +1,2 @@
 "use strict";
-//# sourceMappingURL=dashboard.js.map
+//# sourceMappingURL=Dashboard.js.map
