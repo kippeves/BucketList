@@ -54,6 +54,8 @@
 
  .dream-check {
      width: min-content;
+     margin-top: 0.3rem;
+     margin-right: 0.5rem;
  }
 
  .dream-theme {
