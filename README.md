@@ -1,18 +1,61 @@
-# BUCKETLIST
-## Jag ska skriva en beskrivning här snart med många emojis till hjälp
-Kort och gott: tanken är att studenterna ska 
-* spara undan namnet de loggar in med, enbart namnet.
-* toggla mellan att se och dölja lösenordet
-* använda namnet i dashboard
-* dynamiskt få ut elementen i dream-list i Dashboard istället för de hårdkodade i HTML (de ska se likadana ut i HTML efteråt med klasser och struktur)
-* kunna ändra om en dröm är uppfylld eller ej programmatiskt i TS
-* lägga till en ny dröm
+# 🌟 BUCKETLIST – Ett drömprojekt i TypeScript
 
-### Level ups:
-* I settings kunna ändra namnet man satt från login
-* I settings kunna lägga till nya teman på drömmar
-* I settings kunna ta bort teman och även rensa det teman på de drömmar som hade den
+> ✨ “Alla stora äventyr börjar med en dröm. Nu är det dags att koda din egen!” ✨
 
+---
 
-## TODO:
-* Kunna ta bort en dröm helt
+## 🧭 Om projektet
+
+Du har fått en färdig HTML-struktur – din uppgift är att ge liv åt den med **TypeScript** och **DOM-manipulation**.
+
+Appen är en **Bucket List** – alltså en "att göra innan jag dör"-lista. Till skillnad från en vanlig to-do, handlar det här om dina **drömmar**: små som stora.
+
+---
+
+## 🔐 Steg 1: Logga in
+
+Det första användaren gör är att logga in med ett namn. Vi använder **ingen backend eller inloggning på riktigt**, utan:
+
+- ✅ Användaren skriver in sitt namn  
+- ✅ Det namnet sparas i en **global variabel** (`name`) som resten av appen kan använda  
+- ✅ Lösenordet finns bara som ett formulärfält och ska **kunna visas/döljas** med ett klick
+
+### 🧪 Validering
+
+- Namn får inte vara tomt  
+- Lösenord måste innehålla minst 4 tecken (t.ex.)
+
+---
+
+## 🏠 Steg 2: Dashboard – hantera drömmar
+
+I `Dashboard`-vyn kommer listan över användarens drömmar.
+
+### 🎯 Vad du ska göra:
+
+- 🔁 **Rendera drömlistan dynamiskt från `dreams`-arrayen**  
+  (HTML:n ska se likadan ut som nu – men skapas i TypeScript!)
+- ➕ **Lägga till nya drömmar** via ett formulär (med namn och tema)
+- 🗑️ **Ta bort drömmar**
+- ✅ **Kunna markera en dröm som uppfylld / inte uppfylld** (via checkbox)
+
+📌 Tips: Varje dröm har `id`, `name`, `theme`, `checked`. Du hittar dem i `variables.ts`.
+
+---
+
+### 🧪 Valideringsexempel
+
+- Nya drömmar måste ha ett namn
+- Pricka av att ett tema är valt
+
+---
+
+## 🌈 Bonus: Level Ups (om du har tid!)
+
+Vill du gå längre? Satsa på dessa extrauppgifter:
+
+### ⚙️ Inställningar (`Settings`-vyn):
+
+- ✏️ **Ändra namn** – så det uppdateras globalt
+- 🎨 **Lägg till nya teman** (läggs till i `themes`-arrayen och blir valbara)
+- ❌ **Ta bort teman** – och om någon dröm hade det temat: rensa det så det står “–” eller liknande
