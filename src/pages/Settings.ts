@@ -1,10 +1,13 @@
 // här är det bara level-up!
-import { name, themes } from "../variables.js";
+import { name, themes } from "../models/Dream.js";
+import { logOut } from "../utils/Auth.js";
 
 const nameInput = document.getElementById("name-input") as HTMLInputElement;
+const themeList = document.getElementById("theme-list") as HTMLUListElement;
+const logOutBtn = document.querySelector(".logout") as HTMLButtonElement;
+
 nameInput.value = name;
 
-const themeList = document.getElementById("theme-list") as HTMLUListElement;
 if (themeList) {
     themes.forEach(theme => {
         const li = document.createElement("li");
@@ -14,9 +17,4 @@ if (themeList) {
 }
 
 // "logga ut"
-const logOutBtn = document.querySelector(".logout");
 logOutBtn?.addEventListener("click", logOut);
-
-function logOut(): void {
-    window.location.replace('login.html');
-};
