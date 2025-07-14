@@ -1,6 +1,4 @@
 import { Dream } from "../models/Dream.js"
-import { loadData } from "../utils/Auth.js"
+import { storage } from "../utils/Storage.js"
 
-const key = "dreams";
-
-export const getDreams = () => loadData<Dream[]>(key);
+export const { save: saveDreams, load: getDreams } = storage<Dream[]>("dreams");

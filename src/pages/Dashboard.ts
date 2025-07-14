@@ -7,13 +7,12 @@ const list = document.querySelector(".dream-list");
 const username = getUsername() ?? "NO USERNAME SET";
 
 const trashIcon = () => {
-    const removeIcon = document.createElement("img") as HTMLImageElement;
+    const removeIcon = document.createElement("img");
     removeIcon.src = "../assets/images/trash_delete.png";
     return removeIcon;
 }
 
 const dreams = getDreams();
-console.log(dreams)
 
 const dreamItems = dreams?.map(d => {
     const item = document.createElement("li");
@@ -57,14 +56,6 @@ list?.replaceChildren(...dreamItems ?? [])
     <label for="dream-check-1">Lära mig HTML/CSS, <span class="dream-theme">teknikdrömmar</span></label>
     <button type="button"><img src="../assets/images/trash_delete.png"></button>
 </li>
-*/
-/*
-<li class="dream-list-item">
-    <input class="dream-check" type="checkbox" name="dream-check" id="dream-check-1">
-    <label for="dream-check-1">Lära mig HTML/CSS<span class="dream-theme">teknikdrömmar</span></label>
-    <button type="button"><img src="../assets/images/trash_delete.png"></button>
-</li>
-
 */
 
 
