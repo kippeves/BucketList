@@ -1,29 +1,40 @@
 import { storage } from "../utils/Storage.js";
-import { getDreams, saveDreams } from "./Dreams.js";
+import { loadDreams, saveDreams } from "./Dreams.js";
 
-const key = "themes";
-export const { save: saveThemes, load: getThemes } = storage<string[]>("themes");
+export const { save: saveThemes, load: loadThemes } = storage<string[]>("themes");
 
+export async function removeTheme(themeKey: string) {
+    return new Promise<string[]>(async (resolve, reject) => {
+        let themes = await loadThemes();
+        let dreams = await loadDreams();
+        if (!themes || !dreams) return reject();
 
-export const removeTheme = (themeKey: string) => {
-    let currentThemes = getThemes();
-    if (!currentThemes) return;
+        let themesCopy = structuredClone(themes);
+        const dreamsCopy = structuredClone(dreams);
 
-    currentThemes = currentThemes.filter(x => x !== themeKey);
-    saveThemes({ data: currentThemes });
+        themesCopy = themesCopy.filter(x => x !== themeKey);
+        dreamsCopy?.filter(d => d.theme === themeKey).forEach(d => d.theme = '-');
 
-    let dreams = getDreams();
-    if (!dreams) return;
+        if (themesCopy === themes)
+            return resolve(themesCopy);
 
-    dreams?.filter(d => d.theme === themeKey).forEach(d => d.theme = '-');
-    saveDreams({ data: dreams });
-    return currentThemes;
+        saveThemes({ data: themesCopy });
+
+        if (dreamsCopy !== dreams)
+            saveDreams({ data: dreamsCopy });
+
+        return resolve(themesCopy);
+    });
 }
 
-export const addTheme = (newTheme: string) => {
-    const currentThemes = getThemes();
-    if (!currentThemes) return;
-    if (!currentThemes?.includes(newTheme))
-        currentThemes?.push(newTheme);
-    saveThemes({ data: currentThemes });
+export const addTheme = async (newTheme: string) => {
+    return new Promise<string[]>(async (resolve, reject) => {
+        const currentThemes = await loadThemes();
+        if (!currentThemes)
+            return reject();
+        if (!currentThemes?.includes(newTheme))
+            currentThemes?.push(newTheme);
+        saveThemes({ data: currentThemes });
+        return resolve(currentThemes);
+    })
 }

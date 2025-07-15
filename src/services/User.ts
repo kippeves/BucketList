@@ -1,16 +1,15 @@
 import { UserSettings } from "../models/App.js";
 import { storage } from "../utils/Storage.js";
 
-export const userStorage = storage<UserSettings>("user");
-const { load, save } = userStorage;
+const userStorage = storage<UserSettings>("user");
+export const { load: loadUser, save: saveUser } = userStorage;
 
-export const setUsername = (name: string) => {
-    const data = load();
-    if (!data) return;
-
-    data.username = name;
-
-    save({ data });
+export const setUsername = async (name: string) => {
+    let data = await loadUser();
+    await saveUser({ data: { ...data, username: name } });
 }
 
-export const getUsername = () => load()?.username;
+export const getUsername = async () => {
+    const user = await loadUser();
+    return user.username;
+}

@@ -1,5 +1,6 @@
 // här är det bara level-up!
-import { addTheme, getThemes, removeTheme } from "../services/Themes.js";
+import { UserSettings } from "../models/App.js";
+import { addTheme, loadThemes, removeTheme } from "../services/Themes.js";
 import { getUsername, setUsername } from "../services/User.js";
 import { logOut } from "../utils/Auth.js";
 
@@ -9,12 +10,19 @@ const addThemeBtn = document.querySelector(".add-theme button") as HTMLButtonEle
 const changeNameBtn = document.querySelector(".change-name button") as HTMLButtonElement;
 const logOutBtn = document.querySelector(".logout") as HTMLButtonElement;
 
-let themes = getThemes();
-let username = getUsername();
+let themes: string[];
+let username: string;
 
-nameInput.value = username ?? "NO USERNAME SET";
 
-themeList && refreshItems();
+loadThemes().then(t => {
+    themes = t
+    refreshItems();
+});
+
+getUsername().then(name => {
+    nameInput.value = name;
+    username = name;
+})
 
 changeNameBtn.addEventListener("click", e => {
     e.preventDefault();
@@ -25,30 +33,31 @@ changeNameBtn.addEventListener("click", e => {
     }
 })
 
-addThemeBtn?.addEventListener("click", e => {
+addThemeBtn?.addEventListener("click", async e => {
     e.preventDefault();
     const themeInput = document.getElementById("theme-input") as HTMLInputElement;
     const newThemeName = themeInput.value.trim();
-    if (newThemeName.length > 0) {
+    if (newThemeName.length > 0)
         addTheme(newThemeName)
-        themes = getThemes();
-        refreshItems();
-        themeInput.value = "";
-    }
+            .then(newList => {
+                themes = newList;
+                refreshItems();
+                themeInput.value = "";
+            });
 })
 
-function refreshItems() {
+async function refreshItems() {
     if (!themes)
         return;
 
-    themeList.replaceChildren(...[...themes].map(theme => {
+    themeList.replaceChildren(...themes.map(theme => {
         const li = document.createElement("li");
         li.innerHTML = `<p>${theme}</p> <img src="../assets/images/trash_delete.png" />`;
         themeList.appendChild(li);
         const img = li.querySelector("img");
-        img?.addEventListener("click", e => {
+        img?.addEventListener("click", async e => {
             e.preventDefault();
-            themes = removeTheme(theme);
+            themes = await removeTheme(theme);
             refreshItems();
         });
         return li;

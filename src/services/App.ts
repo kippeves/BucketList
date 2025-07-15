@@ -1,14 +1,18 @@
-import { storage } from "../utils/Storage.js"
 import { saveDreams } from "./Dreams.js";
 import { saveThemes } from "./Themes.js";
-import { setUsername } from "./User.js";
+import { saveUser, setUsername } from "./User.js";
 
+export const initializeSettings = async (username: string) => {
+    
+    await saveUser({
+        data: { username }
+    });
 
+    await saveThemes({
+        data: ["teknikdrömmar", "vardagsdrömmar", "husdrömmar", "sportdrömmar", "resdrömmar"]
+    });
 
-export const initializeSettings = (username: string) => {
-    setUsername(username);
-    saveThemes({ data: ["teknikdrömmar", "vardagsdrömmar", "husdrömmar", "sportdrömmar", "resdrömmar"] });
-    saveDreams({
+    await saveDreams({
         data: [{
             id: 1,
             name: "Lära mig HTML/CSS",

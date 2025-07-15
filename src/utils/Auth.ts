@@ -1,5 +1,5 @@
 export function logOut(): void {
-    window.location.replace('./pages/login.html');
+    window.location.replace('login.html');
 };
 
 export function login(username: string): void {

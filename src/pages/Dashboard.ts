@@ -1,10 +1,8 @@
-import { getDreams } from "../services/Dreams.js";
+import { checkDream, loadDreams } from "../services/Dreams.js";
 import { getUsername } from "../services/User.js";
 
 const usernameLabel = document.getElementById("user-name");
 const list = document.querySelector(".dream-list");
-
-const username = getUsername() ?? "NO USERNAME SET";
 
 const trashIcon = () => {
     const removeIcon = document.createElement("img");
@@ -12,52 +10,55 @@ const trashIcon = () => {
     return removeIcon;
 }
 
-const dreams = getDreams();
+const refreshItems = () =>
+    loadDreams().then(dreams => {
+        const newItems = dreams.map(d => {
+            const item = document.createElement("li");
+            item.className = "dream-list_item";
 
-const dreamItems = dreams?.map(d => {
-    const item = document.createElement("li");
-    item.className = "dream-list_item";
+            const input = document.createElement("input");
+            input.className = "dream-check";
+            input.type = "checkbox";
+            input.name = "dream-check";
+            input.id = `dream-check-${d.id}`
+            input.checked = d.checked;
 
-    const input = document.createElement("input");
-    input.className = "dream-check";
-    input.type = "checkbox";
-    input.name = "dream-check";
-    input.id = `dream-check-${d.id}`
-    input.checked = d.checked;
+            input.addEventListener("change", async e => {
+                e.preventDefault();
+                await checkDream(d.id);
+                refreshItems();
+            })
 
-    const label = document.createElement("label") as HTMLLabelElement;
-    label.htmlFor = input.id;
+            const label = document.createElement("label") as HTMLLabelElement;
+            label.htmlFor = input.id;
 
-    const theme = document.createElement("span") as HTMLSpanElement;
-    theme.className = "dream-theme";
-    theme.textContent = d.theme;
+            const theme = document.createElement("span") as HTMLSpanElement;
+            theme.className = "dream-theme";
+            theme.textContent = d.theme;
 
-    label.append(
-        document.createTextNode(`${d.name}, `),
-        theme
-    )
+            label.append(
+                document.createTextNode(`${d.name}, `),
+                theme
+            )
 
-    const button = document.createElement("button") as HTMLButtonElement;
-    button.type = "button";
-    button.append(trashIcon())
+            const button = document.createElement("button") as HTMLButtonElement;
+            button.type = "button";
+            button.append(trashIcon())
 
-    item.append(
-        input,
-        label,
-        button
-    );
-    return item;
-})
+            item.append(
+                input,
+                label,
+                button
+            );
+            return item;
+        })
 
-list?.replaceChildren(...dreamItems ?? [])
-/*
-<li class="dream-list_item">
-    <input class="dream-check" type="checkbox" name="dream-check" id="dream-check-1" checked="">
-    <label for="dream-check-1">Lära mig HTML/CSS, <span class="dream-theme">teknikdrömmar</span></label>
-    <button type="button"><img src="../assets/images/trash_delete.png"></button>
-</li>
-*/
+        list?.replaceChildren(...newItems)
+    })
+
+refreshItems();
 
 
 if (usernameLabel)
-    usernameLabel.textContent = username;
+    getUsername()
+        .then(name => usernameLabel.textContent = name)
