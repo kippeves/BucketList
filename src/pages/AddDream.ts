@@ -33,7 +33,7 @@ form?.addEventListener("submit", (e) => {
 const showConfirm = ({ result }: { result: boolean }) => {
     const main = document.querySelector("main");
     const div = document.createElement("div");
-    div.textContent = result ? "Din dröm lades till" : "Din dröm kunde inte läggas till";
+    div.textContent = "Din dröm " + (result ? "lades till" : "kunde inte läggas till");
     main?.append(div);
 
     setTimeout(() => {

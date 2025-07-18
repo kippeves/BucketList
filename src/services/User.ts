@@ -1,8 +1,7 @@
 import { UserSettings } from "../models/App.js";
 import { storage } from "../utils/Storage.js";
 
-const userStorage = storage<UserSettings>("user");
-export const { load: loadUser, save: saveUser } = userStorage;
+export const { load: loadUser, save: saveUser } = storage<UserSettings>("user");
 
 export const setUsername = async (name: string) => {
     let data = await loadUser();

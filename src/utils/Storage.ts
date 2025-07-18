@@ -1,9 +1,11 @@
-export const storage = <T>(key: string) => {
+
+
+export const storage = <T>(index: string) => {
 
     const clear = (key: string) => localStorage.removeItem(key);
 
     const load = async () => new Promise<T>((resolve, reject) => {
-        const data = localStorage.getItem(key);
+        const data = localStorage.getItem(index);
         if (data === undefined)
             return reject();
 
@@ -11,9 +13,9 @@ export const storage = <T>(key: string) => {
     })
 
 
-    const save = ({ data }: { data: T }) => new Promise<void>((resolve, reject) => {
-        localStorage[key] = JSON.stringify(data);
-        return resolve();
+    const save = ({ data }: { data: T }) => new Promise((resolve, reject) => {
+        localStorage[index] = JSON.stringify(data);
+        return resolve(true);
     })
 
     return { load, save, clear }
